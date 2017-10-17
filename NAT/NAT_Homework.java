@@ -32,7 +32,7 @@ public class NAT_Homework {
         System.out.println("NAT Receives Packet from External Network\n");
         print_packet(mypacket);
         for(int i=0; i<(entry >= 10 ? 10 : entry); i++){//테이블에서 해당하는 entry를 검색한다.
-            if(Arrays.equals(mypacket.sip,table[i].extip) && mypacket.sport == table[i].extport){//해당하는 entry를 찾으면 dip를 해당 entry의 priip값으로 수정을 해준다.
+            if((Arrays.equals(mypacket.sip,table[i].extip) && mypacket.sport == table[i].extport) && (mypacket.dport == table[i].priport)){//해당하는 entry를 찾으면 dip를 해당 entry의 priip값으로 수정을 해준다.
                 mypacket.dip = Arrays.copyOf(table[i].priip, table[i].priip.length);
                 System.out.println("NAT Sends Packets to Private Network\n");
                 print_packet(mypacket);
