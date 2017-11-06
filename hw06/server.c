@@ -45,8 +45,9 @@ int main(int argc, char **argv) {
     addr.sin_family = AF_INET;
     addr.sin_port = htons(PORT_NUM);
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    if (bind(listenfd, (struct sockaddr *) &addr, addrlen) == -1)
+    if (bind(listenfd, (struct sockaddr *) &addr, addrlen) == -1) {
         return 1;
+    }
     listen(listenfd, 5);
     ev.events = EPOLLIN;
     ev.data.fd = listenfd;
@@ -66,12 +67,14 @@ int main(int argc, char **argv) {
                 user_fds[clientfd] = 1;
                 user_data = malloc(sizeof(user_data));
                 user_data->fd = clientfd;
+
                 sprintf(user_data->name, "user(%d)", clientfd);
                 ev.events = EPOLLIN;
                 ev.data.ptr = user_data;
                 epoll_ctl(epollfd, EPOLL_CTL_ADD, clientfd, &ev);
             } else {
                 user_data = events[i].data.ptr;
+
                 memset(buf, 0x00, MAXLINE);
                 readn = read(user_data->fd, buf, MAXLINE);
                 if (readn <= 0) {
