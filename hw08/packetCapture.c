@@ -40,7 +40,6 @@ int main(int argc, char **argv){
     if(readn < 0){//패킷 수신 실패시 에러메세지
       return 1;
     }
-    struct ether_header *eheader = (struct ether_header*)buffer;
     PacketCapture(buffer, readn);//수신 되어진 패킷에 대하여 출력
   }
   close(sock_raw);
@@ -72,8 +71,10 @@ void PacketCapture(unsigned char* buffer, int size){
 
 void printEtherHeader(unsigned char *buf){
   printf("Ethernet Header\n");
+  struct ether_header *etherh = (struct ether_header *)buf;
   printf("\t|-Destination MAC address: %02X:%02X:%02X:%02X:%02X:%02X\n",buf[6],buf[7],buf[8],buf[9],buf[10],buf[11]);
   printf("\t|-Source MAC address: %02X:%02X:%02X:%02X:%02X:%02X\n",buf[0],buf[1],buf[2],buf[3],buf[4],buf[5]);
+  printf("\t|-Protocol : %u\n", etherh->ether_type);
 }
 void printIpHeader(struct iphdr *iph){
   printf("IP Header\n");
