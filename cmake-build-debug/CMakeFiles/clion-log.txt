@@ -1,4 +1,4 @@
-/home/haon4658/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/172.4343.16/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/haon4658/CLionProjects/Computer-Network
+/home/haon4658/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/173.3727.114/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/haon4658/CLionProjects/Computer-Network
 -- The C compiler identification is GNU 5.4.0
 -- The CXX compiler identification is GNU 5.4.0
 -- Check for working C compiler: /usr/bin/cc
@@ -27,4 +27,4 @@ CMake Error: CMake can not determine linker language for target: Computer_Networ
 CMake Error: Cannot determine link language for target "Computer_Network".
 -- Generating done
 -- Build files have been written to: /home/haon4658/CLionProjects/Computer-Network/cmake-build-debug
-Unable to determine product file path for target Computer_Network (Debug). Running and debugging will be unavailable.
+Unable to determine product file path for target Computer_Network. Running and debugging will be unavailable.

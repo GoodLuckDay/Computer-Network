@@ -35,6 +35,7 @@ int main(int argc, char **argv){
     if(readn < 0){//패킷 수신 실패시 에러메세지
       return 1;
     }
+  
     PrintPacket(buffer, readn);//수신 되어진 패킷에 대하여 출력
   }
   close(sock_raw);

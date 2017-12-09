@@ -1,0 +1,7 @@
+/home/haon4658/CLionProjects/Computer-Network/FTP Homework/test.c: In function ‘main’:
+/home/haon4658/CLionProjects/Computer-Network/FTP Homework/test.c:19:14: warning: format not a string literal and no format arguments [-Wformat-security]
+       printf(query);
+              ^
+/tmp/ccYwHbgP.o: In function `main':
+test.c:(.text+0xea): undefined reference to `sqlite3_open'
+collect2: error: ld returned 1 exit status

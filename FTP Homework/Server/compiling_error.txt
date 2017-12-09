@@ -1,0 +1,5 @@
+/tmp/cc21Gjad.o: In function `file_upload':
+/home/haon4658/CLionProjects/Computer-Network/FTP Homework/Server/server.c:132: undefined reference to `sqlite3_open'
+/home/haon4658/CLionProjects/Computer-Network/FTP Homework/Server/server.c:138: undefined reference to `sqlite3_mprintf'
+/home/haon4658/CLionProjects/Computer-Network/FTP Homework/Server/server.c:139: undefined reference to `sqlite3_exec'
+collect2: error: ld returned 1 exit status
