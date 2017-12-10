@@ -130,7 +130,6 @@ int download(int sockfd, char *file) {
     }
 
     while ((readn = recv(sockfd, buf, MAXLINE, 0)) > 0) {
-        printf("%s\n", buf);
         writen = write(fd, buf, readn);
         if (writen != readn) {
             perror("File write error\n");

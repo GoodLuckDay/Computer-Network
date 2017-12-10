@@ -67,7 +67,6 @@ int main(int argc, char **argv) {
         int pid = fork();
         if (pid == 0) {
             process(cli_sockfd);
-        } else {
             close(cli_sockfd);
         }
     }
@@ -126,7 +125,6 @@ int file_upload(int sockfd, char *filename) {
         size += readn;
         memset(buf, 0x00, MAXLINE);
     }
-    close(fd);
 
     addrlen = sizeof(addr);
     getpeername(sockfd, (struct sockaddr *) &addr, &addrlen);
@@ -138,7 +136,6 @@ int file_upload(int sockfd, char *filename) {
                 "insert into file_info(name, ip, up_date, count, size) values('%q', '%q', '%q', '%d', '%d');", filename,
                 inet_ntoa(addr.sin_addr), up_date, 0, size);
         ret = sqlite3_exec(db, query, callback, 0, &errMsg);
-        printf("%d", ret);
         if (ret != SQLITE_OK) {
             printf("%s\n", errMsg);
         }
@@ -159,7 +156,7 @@ int callback(void *farg, int argc, char **argv, char **ColName) {
     sprintf(buf, "%s\n", "-----------------------------");
     sendn = send(sockfd, buf, strlen(buf), 0);
     printf("--> %d\n", sendn);
-    return 13;
+    return 0;
 }
 
 int file_download(int sockfd, char *filename) {
@@ -176,18 +173,19 @@ int file_download(int sockfd, char *filename) {
 
   memset(buf, 0x00, MAXLINE);
   while((readn = read(fd, buf, MAXLINE)) > 0){
-    printf("%s\n", buf);
     if((sendn = send(sockfd, buf, readn, 0))< 0){
       perror("Socket send error\n");
       break;
     }
     memset(buf, 0x00, MAXLINE);
   }
-  printf("OK?\n");
   ret = sqlite3_open("filelist.db", &db);
   if(ret == SQLITE_OK){
-    char *query = sqlite3_mprintf("update file_info set count = count + 1 where name = %q;", filename);
-    sqlite3_exec(db, "update file_info set count = count + 1 ", 0, 0, &errMsg);
+    char *query = sqlite3_mprintf("update file_info set count = count + 1 where name = '%q';", filename);
+    ret = sqlite3_exec(db, query, 0, 0, &errMsg);
+    if(ret != SQLITE_OK){
+      printf("%s\n",errMsg);
+    }
   }
 }
 
